@@ -1,6 +1,6 @@
 html, body {
     margin: 0;
-    background-color: #efefef;
+    background-color: white;
     font-family: sans-serif;
 }
 .wrapper {
@@ -8,7 +8,7 @@ html, body {
     height: 640px;
     padding: 5px;
     margin: 0 auto;
-    background-color: #ddd;
+    background-color:#f4e4e9;;
 }
 #loginWrapper {
     position: fixed;
@@ -40,10 +40,11 @@ html, body {
 }
 #historyMsg {
     height: 400px;
-    background-color: #fff;
+    background-color: #f1f1f1;
     overflow: auto;
     padding: 2px;
 }
+
 #historyMsg img {
     max-width: 99%;
 }
@@ -52,9 +53,13 @@ html, body {
 }
 .items {
     height: 30px;
+    display: flex;
+    align-items: center;
 }
 #colorStyle {
     width: 50px;
+    height: 25px;
+    background-color: red;
     border: none;
     padding: 0;
 }

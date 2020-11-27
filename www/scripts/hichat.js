@@ -38,7 +38,7 @@ HiChat.prototype = {
         });
         this.socket.on('system', function(nickName, userCount, type) {
             var msg = nickName + (type == 'login' ? ' joined' : ' left');
-            that._displayNewMsg('system ', msg, 'red');
+            that._displayNewMsg('system ', msg, 'red',true);
             document.getElementById('status').textContent = userCount + (userCount > 1 ? ' users' : ' user') + ' online';
         });
         this.socket.on('newMsg', function(user, msg, color) {
@@ -138,17 +138,33 @@ HiChat.prototype = {
         };
         emojiContainer.appendChild(docFragment);
     },
-    _displayNewMsg: function(user, msg, color) {
+    _displayNewMsg: function(user, msg, color, system = false) {
         var container = document.getElementById('historyMsg'),
             msgToDisplay = document.createElement('p'),
             date = new Date().toTimeString().substr(0, 8),
             //determine whether the msg contains emoji
             msg = this._showEmoji(msg);
-        msgToDisplay.style.color = color || '#000';
+        // msgToDisplay.style.color = color || '#000';
+        if (system){
+            msgToDisplay.style.color = color || '#000';
+        } else {
+            msg = encode(msg,false,changeChat)
+        }
         msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
         container.appendChild(msgToDisplay);
         container.scrollTop = container.scrollHeight;
     },
+    // _displayNewMsg: function(user, msg, color) {
+    //     var container = document.getElementById('historyMsg'),
+    //         msgToDisplay = document.createElement('p'),
+    //         date = new Date().toTimeString().substr(0, 8),
+    //         //determine whether the msg contains emoji
+    //         msg = this._showEmoji(msg);
+    //     msgToDisplay.style.color = color || '#000';
+    //     msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+    //     container.appendChild(msgToDisplay);
+    //     container.scrollTop = container.scrollHeight;
+    // },
     _displayImage: function(user, imgData, color) {
         var container = document.getElementById('historyMsg'),
             msgToDisplay = document.createElement('p'),
